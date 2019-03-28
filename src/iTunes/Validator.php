@@ -4,7 +4,6 @@ namespace ReceiptValidator\iTunes;
 
 use ReceiptValidator\RunTimeException;
 use GuzzleHttp\Client as HttpClient;
-use function Monolog\Handler\error_log;
 
 class Validator
 {
@@ -255,7 +254,6 @@ class Validator
 			// on a 21007 error, retry the request in the sandbox environment
 			// these are receipts from the Apple review team
 			if ($response->getResultCode() === ResponseInterface::RESULT_SANDBOX_RECEIPT_SENT_TO_PRODUCTION) {
-				error_log("sendRequestUsingClient: ERROR 21007, the receipt is a sandbox receipt but was sent to production.");
 				$config = array_merge($this->getClientConfig(), ['base_uri' => self::ENDPOINT_SANDBOX]);
 				$client = new HttpClient($config);
 
