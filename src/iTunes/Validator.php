@@ -262,7 +262,6 @@ class Validator
 
 		} else {
 			$this->isSandbox = true;
-			error_log("Processing a sandbox receipt");
 			$response = new SandboxResponse($decodedBody);
 		}
 
